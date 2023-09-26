@@ -2,6 +2,8 @@ package com.sam.workout;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,6 +20,15 @@ public class WorkoutDetailFragment extends Fragment {
 
     public void setWorkout(long id) {
         this.workoutId = id;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            workoutId = savedInstanceState.getLong("workoutId");
+        }
+
     }
 
     @Override
@@ -39,5 +50,10 @@ public class WorkoutDetailFragment extends Fragment {
             title.setText(workout.getName());
             description.setText(workout.getDescription());
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putLong("workoutId", workoutId);
     }
 }
